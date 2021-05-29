@@ -2,11 +2,11 @@
 This repo explores the idea of transforming eTempalte2 using LitElement and lit-html
 
 ## The "problem(s)"
-* eTempalte2 relys a lot on now obsolte technolegies like jQuery, jQueryUI and libaries based on theses
+* eTempalte2 relys a lot on now obsolte technolegies like jQuery, jQueryUI and libraries based on theses
 * Layout in eTemplate2 is "messy" as theming, layout in apps and styling of individual widgets mess with each other
 * eTemplate2 always re-renders / rebuilds the whole DOM, not just changed parts (unless you only tell the changed widget to update)
 
-## One possible solution: use webcomponents, LitElement, lit-html and a component libary based on them
+## Possible solution: use webcomponents, LitElement, lit-html and a component library
 
 Idea is to use [webcomponents](https://www.webcomponents.org/introduction) specially [LitElement](https://lit-element.polymer-project.org/guide) and [lit-html](https://lit-html.polymer-project.org/guide) to replace or renew most of our current client-side eTempalte2 code *gradually*. 
 
