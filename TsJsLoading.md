@@ -16,6 +16,7 @@
 * execution is defered until all javascript dependencies are loaded AND executed
 * current workflow does not "understand" ES5 modules directly and makes it hard to even create a prototype using [LitElement/webcomponents](https://github.com/EGroupware/lit/blob/main/README.md)
 * we're currently not generating (working) map-files, if the default bundeling is enabled
+* no (automatic) Tree Shaking (Unused export elimination and export mangling)
 
 ## Currently used bundels from [Gruntfile.js](https://github.com/EGroupware/egroupware/blob/master/Gruntfile.js)
 * api/js/jsapi/jsapi.min.js containing everything from the egw object (JavaScript) plus other dependencies like jQuery(UI), dhtmlx*, egw_action and choosen
@@ -37,3 +38,10 @@
 * use [Webpack](https://webpack.js.org/) to bundle and build our dependencies
 * use newer [Rollup](https://rollupjs.org/guide/en/) instead
 * use an [ES5 module shim](https://github.com/guybedford/es-module-shims) with [Import Maps](https://github.com/wicg/import-maps#the-basic-idea) support
+* ...
+
+## Problems from our existing code-base the above candidates need to deal with
+* not all code is already TypeScript or modern JavaScript modules eg. client-side API (egw object), framework and egw_action stuff
+* non-TypeScript code contains no import statements currently AND TypeScript not always all necessary onces
+* our ContentSecurityPolicy does NOT allow to use inline javascript (could be worked around using a nonce)
+* ...
