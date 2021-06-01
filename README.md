@@ -76,6 +76,37 @@ tpl.set_select_options(sel_options);
 ```
 If ```tpl.set_value(changed_content)``` would be called later only DOM parts that need modification would be re-renders thanks to lit-html.
 
+### Templates
+I (Nathan) think we want the templates in the .xet file to be transformed to something we can let WebComponents render more directly.  Ex:
+```
+  <et2-template id="myapp.edit.sub">
+    <et2-textbox label="${lang('Foo label'}" value=${content.foo}></et2-textbox>
+    <et2-textbox label="${lang('Bar label'}" value=${content.bar}></et2-textbox>
+    <et2-button label="${lang('Submit'}"/></et2-button>
+  </et2-template>
+```
+Then have et2-template (widget) use built in stuff to handle it all:
+```
+import { LitElement, html } from 'lit-element';
+
+class Et2Template // extends LitElement 
+{
+  constructor() {
+      super();
+      let template = document.getElementById(this.id); // Actually, load from cached file
+      let templateContent = template.content;
+
+      const shadowRoot = this.attachShadow({mode: 'open'})
+        .appendChild(templateContent.cloneNode(true));
+    }
+  }
+}
+customElements.define('et2-template', Et2Template);
+```
+Note no need for render, since WebComponents [recursively] handles the children.  We may need to add some stuff, but do not need to add the children there.
+https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots
+
+
 ## Resources around webcompenents, LitElement, lit-html, ...
 - https://webcomponents.dev/blog/all-the-ways-to-make-a-web-component/
 - https://dzone.com/articles/web-component-solutions-a-comparison
