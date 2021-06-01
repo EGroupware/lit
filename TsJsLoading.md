@@ -17,9 +17,10 @@
 * current workflow does not "understand" ES5 modules directly and makes it hard to even create a prototype using [LitElement/webcomponents](https://github.com/EGroupware/lit/blob/main/README.md)
 * we're currently not generating (working) map-files, if the default bundeling is enabled
 
-## Currently used bundels
+## Currently used bundels from [Gruntfile.js](https://github.com/EGroupware/egroupware/blob/master/Gruntfile.js)
 * api/js/jsapi/jsapi.min.js containing everything from the egw object (JavaScript) plus other dependencies like jQuery(UI), dhtmlx*, egw_action and choosen
 * api/js/etemplate/etempalte2.min.js contains all non-app-specific eT2 widgets
+* TinyMCE (already minified bundle from vendor directory)
 * one of the template bundles also containing the api/js/framework code
   * pixelegg/js/fw_pixelegg.min.js standard desktop framework
   * pixelegg/js/fw_mobile.min.js mobile framework
