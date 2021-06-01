@@ -5,6 +5,7 @@ This repo explores the idea of transforming eTempalte2 using LitElement and lit-
 * eTempalte2 relys a lot on now obsolte technolegies like jQuery, jQueryUI and libraries based on theses
 * Layout in eTemplate2 is "messy" as theming, layout in apps and styling of individual widgets mess with each other
 * eTemplate2 always re-renders / rebuilds the whole DOM, not just changed parts (unless you only tell the changed widget to update)
+* [custom TS/JS dependency resultion and execution order evaluation, combined with ancient LAB.js loading](https://github.com/EGroupware/lit/blob/main/TsJsLoading.md)
 
 ## Possible solution: use webcomponents, LitElement, lit-html and a component library
 
