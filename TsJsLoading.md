@@ -1,8 +1,8 @@
 # Loading of TypeScript and JavaScript
 
 ## Current situation in EGroupware
-* [server-side](https://github.com/EGroupware/egroupware/blob/master/api/src/Framework/IncludeMgr.php) determines dependencies AND execution-order using a [custom syntax](https://github.com/EGroupware/egroupware/blob/master/calendar/js/app.ts#L13-L21)
-* dependencies are passed as attribute "data-include" on egw.js script tag to client-side
+* [server-side](https://github.com/EGroupware/egroupware/blob/master/api/src/Framework/IncludeMgr.php) determines dependencies AND execution-order using a [custom syntax](https://github.com/EGroupware/egroupware/blob/master/calendar/js/app.ts#L13-L21) doublicating TS import statements
+* dependencies and their execution order are passed as attribute "data-include" on egw.js script tag to client-side
 * [egw.js uses LAB.js](https://github.com/EGroupware/egroupware/blob/master/api/js/jsapi/egw.js#L168-L169) to parallel load all dependencies and defer execution until all are loaded and executed in the predefined order
 * [client-side loader egw.includeJS](https://github.com/EGroupware/egroupware/blob/master/api/js/jsapi/egw_files.js#L141-L150) also uses LAB.js and has some understanding of our bundeling
 * we currently use grunt with grunt-terser plugin to concatinate and minify our dependencies into bundles as defined in [Gruntfile.js](https://github.com/EGroupware/egroupware/blob/master/Gruntfile.js)
@@ -16,6 +16,21 @@
 * execution is defered until all javascript dependencies are loaded AND executed
 * current workflow does not "understand" ES5 modules directly and makes it hard to even create a prototype using [LitElement/webcomponents](https://github.com/EGroupware/lit/blob/main/README.md)
 * we're currently not generating (working) map-files, if the default bundeling is enabled
+
+## Currently used bundels
+* api/js/jsapi/jsapi.min.js containing everything from the egw object (JavaScript) plus other dependencies like jQuery(UI), dhtmlx*, egw_action and choosen
+* api/js/etemplate/etempalte2.min.js contains all non-app-specific eT2 widgets
+* one of the template bundles also containing the api/js/framework code
+  * pixelegg/js/fw_pixelegg.min.js standard desktop framework
+  * pixelegg/js/fw_mobile.min.js mobile framework
+* app-specific bundles for applications using more then an app.js/ts file eg. app-specific eT2 widgets
+  * mail/js/app.min.js (just because it's so big)
+  * calendar/js/app.min.js (lots of eT2 widgets)
+  * notifications/js/notificationajaxpopup.min.js (not sure why ...)
+  * projectmanager/js/app.min.js (eT2 gantt-chart widget plus it's dhtmlx-gant dependencies)
+  * smallpart/js/app.min.js (lots of eT2 widgets)
+  * other app's $app/js/app.js are currently not minified as they are relativ small / little to gain
+* egw.js and LAB.js are loaded directly via script tag in head to load the above
 
 ## Ideas for a new solution using ES5 native import
 * use [Webpack](https://webpack.js.org/) to bundle and build our dependencies
