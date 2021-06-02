@@ -48,6 +48,9 @@
 
 # The Plan
 1. Change to proper modules everywhere
-2. Typescript -> ES 7 target with import statements
+    1. egw object to module
+    2. ?
+
+2. Typescript -> compiler module option, ES 7 target with import statements
 3. ???
 4. Everything works
