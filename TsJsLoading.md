@@ -45,3 +45,8 @@
 * non-TypeScript code contains no import statements currently AND TypeScript not always all necessary onces
 * our ContentSecurityPolicy does NOT allow to use inline javascript (could be worked around using a nonce)
 * ...
+
+# The Plan?
+1. Change to proper modules
+2. ???
+3. Everything works
